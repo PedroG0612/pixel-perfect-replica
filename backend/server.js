@@ -18,6 +18,9 @@ app.get('/', (req, res) => {
   res.send('API da Loja de Roupas Online');
 });
 
+const produtoRoutes = require('./routes/produtoRoutes');
+app.use('/api/produtos', produtoRoutes);
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
