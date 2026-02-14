@@ -1,4 +1,5 @@
 const db = require('../config/db.cjs');
+const bcrypt = require('bcryptjs');
 
 const initDb = () => {
   db.serialize(() => {
@@ -10,7 +11,25 @@ const initDb = () => {
       senha TEXT NOT NULL,
       tipo TEXT CHECK(tipo IN ('admin', 'cliente')) DEFAULT 'cliente',
       data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
-    )`);
+    )`, (err) => {
+      if (!err) {
+        // Criar admin padrão
+        const adminEmail = 'admin@loja.com';
+        db.get(`SELECT * FROM usuarios WHERE email = ?`, [adminEmail], async (err, row) => {
+          if (!row) {
+            const hashedPassword = await bcrypt.hash('Admin@123', 10);
+            db.run(
+              `INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)`,
+              ['Admin', adminEmail, hashedPassword, 'admin'],
+              (err) => {
+                if (err) console.error('Erro ao criar admin:', err);
+                else console.log('Admin padrão criado com sucesso.');
+              }
+            );
+          }
+        });
+      }
+    });
 
     // Tabela Categorias
     db.run(`CREATE TABLE IF NOT EXISTS categorias (

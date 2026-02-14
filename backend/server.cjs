@@ -20,9 +20,11 @@ app.get('/', (req, res) => {
 
 const produtoRoutes = require('./routes/produtoRoutes.cjs');
 const authRoutes = require('./routes/authRoutes.cjs');
+const adminRoutes = require('./routes/adminRoutes.cjs');
 
 app.use('/api/produtos', produtoRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
