@@ -19,7 +19,10 @@ app.get('/', (req, res) => {
 });
 
 const produtoRoutes = require('./routes/produtoRoutes.cjs');
+const authRoutes = require('./routes/authRoutes.cjs');
+
 app.use('/api/produtos', produtoRoutes);
+app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
