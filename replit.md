@@ -11,7 +11,8 @@ A Brazilian fashion e-commerce storefront built with React, Vite, and Tailwind C
 - **Styling**: Tailwind CSS + shadcn/ui components
 - **Routing**: react-router-dom v6
 - **State**: React Context (CartContext) + TanStack React Query
-- **Type**: Frontend-only (no backend server)
+- **Backend**: Express.js (CommonJS) on port 3000 with SQLite database
+- **Type**: Full-stack (React frontend + Express backend)
 
 ### Directory Structure
 ```
